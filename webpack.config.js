@@ -12,9 +12,27 @@ export default {
   mode: 'development',
   entry: './src/main.ts',
   output: {
-    filename: 'main.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
+    publicPath: '/',
+  },
+  optimization: {
+    moduleIds: 'deterministic',
+    runtimeChunk: {
+      name: 'runtime',
+    },
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+    usedExports: true,
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -29,14 +47,17 @@ export default {
     hot: true,
     static: {
       directory: path.join(__dirname, 'public'),
+      publicPath: '/',
     },
     watchFiles: ['src/**/*.*'],
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
       inject: 'body',
       scriptLoading: 'defer',
+      publicPath: '/',
     }),
     new MiniCssExtractPlugin({
       filename: 'styles.css',
@@ -44,8 +65,8 @@ export default {
     new CopyPlugin({
       patterns: [
         {
-          from: 'public',
-          to: 'public',
+          from: path.resolve(__dirname, 'src/assets'),
+          to: path.resolve(__dirname, 'dist/assets'),
         },
       ],
     }),
@@ -55,6 +76,17 @@ export default {
       {
         test: /\.html$/i,
         loader: 'html-loader',
+        options: {
+          sources: {
+            list: [
+              {
+                tag: 'img',
+                attribute: 'src',
+                type: 'src',
+              },
+            ],
+          },
+        },
       },
       {
         test: /\.s[ac]ss$/i,
@@ -98,14 +130,14 @@ export default {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'public/images/[name][ext]',
+          filename: 'assets/images/[name][ext]',
         },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'public/fonts/[name][ext]',
+          filename: 'assets/fonts/[name][ext]',
         },
       },
     ],
