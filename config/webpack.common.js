@@ -45,7 +45,7 @@ export default {
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        use: "file-loader",
+        type: "asset/resource",
       },
       // 4. HTML: Allow to import .html file in .js file
       {

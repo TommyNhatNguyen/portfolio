@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "sgm";
+  src: url("@/assets/fonts/SpaceGrotesk-Medium.woff2") format("woff2"),
+    url("@/assets/fonts/SpaceGrotesk-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "sgb";
+  src: url("@/assets/fonts/SpaceGrotesk-Bold.woff2") format("woff2"),
+    url("@/assets/fonts/SpaceGrotesk-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "sgl";
+  src: url("@/assets/fonts/SpaceGrotesk-Light.woff2") format("woff2"),
+    url("@/assets/fonts/SpaceGrotesk-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "sgr";
+  src: url("@/assets/fonts/SpaceGrotesk-Regular.woff2") format("woff2"),
+    url("@/assets/fonts/SpaceGrotesk-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "sgmb";
+  src: url("@/assets/fonts/SpaceGrotesk-SemiBold.woff2") format("woff2"),
+    url("@/assets/fonts/SpaceGrotesk-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

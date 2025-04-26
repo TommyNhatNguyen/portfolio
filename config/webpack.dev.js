@@ -17,6 +17,8 @@ export default merge(common, {
     watchFiles: ["src/**/*.html", "src/**/*.scss", "src/**/*.ts"],
   },
   optimization: {
-    runtimeChunk: "single",
+    splitChunks: {
+      chunks: "all",
+    },
   },
 });

@@ -1,5 +1,3 @@
-import "./index.scss";
-
-// import '@/ts/index.ts';
+import "@/scss/index.scss";
 
 console.log("Hello asdfjaskldfj");
