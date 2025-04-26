@@ -1,2 +1,3 @@
-import '@/scss/index.scss';
-import '@/ts/index.ts';
+// import '@/scss/index.scss';
+// import '@/ts/index.ts';
+console.log("Hello");

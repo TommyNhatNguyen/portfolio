@@ -4,10 +4,8 @@
   "description": "Personal portfolio website",
   "type": "module",
   "scripts": {
-    "start": "webpack serve --open --mode development",
-    "build": "webpack --mode production",
-    "dev": "webpack --mode development",
-    "watch": "webpack --watch --mode development",
+    "start": "webpack serve --config ./config/webpack.dev.js --open",
+    "build": "webpack --config config/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
