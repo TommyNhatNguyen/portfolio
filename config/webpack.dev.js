@@ -1,13 +1,20 @@
 import { merge } from "webpack-merge";
 import common from "./webpack.common.js";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export default merge(common, {
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
-    static: "../build",
+    static: {
+      directory: path.join(__dirname, "../build"),
+    },
     hot: true,
-    watchFiles: ["src/*.html"],
+    watchFiles: ["src/**/*.html", "src/**/*.scss", "src/**/*.ts"],
   },
   optimization: {
     runtimeChunk: "single",

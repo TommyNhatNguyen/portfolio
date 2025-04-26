@@ -2,47 +2,82 @@ import path, { resolve } from "path";
 import { fileURLToPath } from "url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import * as sass from "sass";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const __build_dirname = path.resolve(__dirname, "../build");
+
 export default {
   entry: {
     app: "./src/main.ts",
   },
   module: {
-    // 1. Typescript: Load all .ts, .tsx file, then resolve and output as
     rules: [
+      // 1. Typescript: Load all .ts, .tsx file, then resolve and output as
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: {
+          loader: "ts-loader",
+          options: {
+            transpileOnly: true,
+          },
+        },
         exclude: /node_modules/,
       },
+      // 2. CSS: Allow to import .css file in .js file
       {
-        test: /\.ts?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
+        test: /\.(css)$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.scss$/i,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+      // 3. Images: Allow to import images
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+        // 3.1 Images: Export copy images to build folder
+        generator: {
+          filename: "assets/images/[name]-[hash][ext]",
+        },
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        use: "file-loader",
+      },
+      // 4. HTML: Allow to import .html file in .js file
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: {
+              minimize: true,
+            },
+          },
+        ],
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: "src/index.html" })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "src/index.html",
+      filename: "index.html",
+      inject: true,
+    }),
+  ],
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".jsx"],
+    alias: {
+      "@": path.resolve(__dirname, "../src"),
+    },
   },
-  output: {
-    filename: "[name].main.js",
-    path: __build_dirname,
-  },
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     title: "Production",
-  //   }),
-  // ],
   output: {
     filename: "[name].main.js",
     path: __build_dirname,
     clean: true,
+    publicPath: "/",
   },
 };

@@ -1,3 +1,5 @@
-// import '@/scss/index.scss';
+import "./index.scss";
+
 // import '@/ts/index.ts';
-console.log("Hello");
+
+console.log("Hello asdfjaskldfj");
