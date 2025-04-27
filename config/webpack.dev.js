@@ -15,6 +15,9 @@ export default merge(common, {
     },
     hot: true,
     watchFiles: ["src/**/*.html", "src/**/*.scss", "src/**/*.ts"],
+    client: {
+      overlay: false,
+    },
   },
   optimization: {
     splitChunks: {

@@ -1,5 +1,7 @@
 html {
   font-size: 62.5%;
+  height: 100%;
+  width: 100%;
 }
 
 body {
@@ -8,8 +10,10 @@ body {
   color: var(--primarytext-color);
   line-height: normal;
   background-color: var(--white-color);
-  max-width: var(--page-max-width);
   margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .container {
@@ -17,6 +21,11 @@ body {
   padding-left: var(--pd-container);
   padding-right: var(--pd-container);
   margin: 0 auto;
+  height: 100%;
+  width: 100%;
+}
+
+section {
   &.--pt {
     padding-top: var(--pd-container);
   }

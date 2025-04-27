@@ -1,0 +1,119 @@
+@import "./mixins";
+.project {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  gap: var(--gutter);
+  height: 100%;
+  width: 100%;
+  position: relative;
+  &:not(:last-of-type) {
+    margin-bottom: 335px;
+  }
+  &__titlegroup {
+    grid-column: 5 / -3;
+    display: block;
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 856 / 535;
+    position: relative;
+    &-image {
+      height: 100%;
+      width: 100%;
+      img {
+        object-fit: cover;
+      }
+    }
+    &-title {
+      position: absolute;
+      bottom: 16px;
+      left: 53px;
+      color: var(--teritary-text-color);
+      font-size: var(--fs-title);
+      font-family: var(--ff-bold);
+      text-transform: capitalize;
+      @include line-clamp(2);
+    }
+  }
+  &__content {
+    grid-column: 5 / -3;
+    margin-top: 16px;
+    &-desc {
+      @include line-clamp(3);
+    }
+  }
+  &__logos {
+    grid-column: 5 / -3;
+    align-content: flex-start;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: var(--gutter);
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    max-height: 220px;
+    &-item {
+      height: 100%;
+      max-height: 100px;
+      min-height: 100px;
+      width: fit-content;
+      height: 100%;
+    }
+  }
+  &.--second {
+    --titlegroup-margintop: 165px;
+    .project__thumb {
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-height: 552px;
+      max-width: 345px;
+      height: 100%;
+      width: 100%;
+      aspect-ratio: 345 / 552;
+      img {
+        object-fit: cover;
+      }
+    }
+    .project__titlegroup {
+      grid-column: 8 / 19;
+      margin-top: var(--titlegroup-margintop);
+    }
+    .project__content {
+      grid-column: 5 / 19;
+      margin-top: calc(var(--titlegroup-margintop) + 16px);
+    }
+  }
+  &.--third {
+    grid-template-columns: 1.07fr 1fr;
+    justify-content: space-between;
+    .project__titlegroup {
+      max-height: 835px;
+      height: 100%;
+      grid-column: 1 / 2;
+      aspect-ratio: 626 / 835;
+    }
+    .project__content {
+      grid-column: 2 / 3;
+      padding-top: 134px;
+      &-desc {
+        @include line-clamp(6);
+      }
+    }
+  }
+  &.--fourth {
+    .project__titlegroup {
+      grid-column: 3 / 16;
+    }
+    .project__content {
+      grid-column: 3 / 16;
+    }
+  }
+  &.--fifth {
+    .project__titlegroup {
+      grid-column: -1 / -13;
+    }
+    .project__content {
+      grid-column: -1 / -13;
+    }
+  }
+}
