@@ -1,6 +1,7 @@
 @import "../mixins";
 
 #home {
+  --border-radius: 32px;
   // SECTION HERO
   .schero {
     background-color: var(--bg-primary-color);
@@ -65,7 +66,7 @@
     &__bottom {
       z-index: 1;
       position: absolute;
-      bottom: -36px;
+      bottom: -26px;
       left: -30px;
       &-title {
         line-height: 1;
@@ -82,19 +83,17 @@
     &.--pt {
       padding-top: 132px;
     }
-    --border-radius: 32px;
-    min-height: 500px;
     position: relative;
     top: calc(-0.5 * var(--border-radius));
-    z-index: 2;
     border-radius: var(--border-radius);
-    overflow: hidden;
     background-color: var(--bg-secondary-color);
     box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
     -webkit-box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
     -moz-box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
+    z-index: 2;
+    overflow: hidden;
     &__title {
-      font-size: var(--fs-title);
+      font-size: var(--fs-title-xl);
       font-family: var(--ff-bold);
       text-transform: uppercase;
       margin-bottom: 16px;
@@ -102,6 +101,67 @@
     }
     &__list {
       margin-top: 132px;
+    }
+  }
+  // SECTION ABOUT
+  .scabout {
+    &.--pt {
+      padding-top: 132px;
+    }
+    position: relative;
+    top: calc(-0.5 * var(--border-radius));
+    border-radius: var(--border-radius);
+    background-color: var(--bg-secondary-color);
+    box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
+    -webkit-box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
+    z-index: 2;
+    overflow: hidden;
+    .scabout-wrapper {
+    }
+    &__title {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--gutter);
+      &-focus {
+        position: relative;
+        top: 20px;
+      }
+      &-content {
+        position: relative;
+        .text {
+          font-size: var(--fs-title-xl);
+          color: var(--secondary-text-color);
+          &__small {
+            font-size: var(--fs-sub-title);
+          }
+        }
+        .caption {
+          position: absolute;
+          bottom: 0;
+          left: 328px;
+          font-size: var(--fs-caption);
+        }
+      }
+    }
+    &__content {
+      margin-top: 250px;
+      &-title {
+        .text {
+          font-size: var(--fs-title);
+          text-transform: capitalize;
+        }
+        .caption {
+          position: relative;
+          font-size: var(--fs-caption);
+          top: -40px;
+          left: 5px;
+        }
+      }
+      &-list {
+        margin-top: calc(var(--gutter) * 15);
+      }
     }
   }
 }
