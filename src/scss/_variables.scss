@@ -1,0 +1,25 @@
+:root {
+  // Container
+  --page-max-width: 1440px;
+  --pd-container: 73px;
+  --container-max-width: calc(1294px + 2 * var(--pd-container));
+  --gutter: 20px;
+  // Color
+  --primarytext-color: #3a3230;
+  --secondary-text-color: #f5d3ab;
+  --white-color: #ffffff;
+  --primary-color: #efdbc3;
+  //   Font
+  --ff-regular: "sgr", "sans-serif";
+  --ff-medium: "sgm", "sans-serif";
+  --ff-light: "sgl", "sans-serif";
+  --ff-semibold: "sgmb", "sans-serif";
+  --ff-bold: "sgb", "sans-serif";
+  --fs-text: 3.6rem;
+  --fs-title: 9.6rem;
+  --fs-title-xl: 12.8rem;
+  --fs-sub-title: 4.8rem;
+  --fs-caption: 1.6rem;
+  --fs-caption-xl: 2.4rem;
+  --fs-emphasize: 480rem;
+}

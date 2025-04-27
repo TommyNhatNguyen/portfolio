@@ -1,3 +1,2 @@
 import "@/scss/index.scss";
-
-console.log("Hello asdfjaskldfj");
+import "@/ts/index.ts";

@@ -1,7 +1,4 @@
+@use "./reset";
 @use "./fonts";
-
-h1 {
-  font-family: "sgb";
-  color: blue;
-  text-align: center;
-}
+@use "./variables";
+@use "./layout";
