@@ -1,0 +1,30 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--ff-regular);
+  font-size: var(--fs-text);
+  color: var(--primarytext-color);
+  line-height: normal;
+  background-color: var(--white-color);
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+}
+
+.container {
+  max-width: var(--container-max-width);
+  padding-left: var(--pd-container);
+  padding-right: var(--pd-container);
+  margin: 0 auto;
+  &.--pt {
+    padding-top: var(--pd-container);
+  }
+  &.--pb {
+    padding-bottom: var(--pd-container);
+  }
+  &.--ptb {
+    padding-top: var(--pd-container);
+    padding-bottom: var(--pd-container);
+  }
+}
