@@ -238,4 +238,42 @@
       }
     }
   }
+  // SECTION CONTACT
+  .sccontact {
+    background-color: var(--bg-primary-color);
+    color: var(--white-color);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    border-radius: var(--border-radius);
+    box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
+    -webkit-box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
+    z-index: 2;
+    overflow: hidden;
+    .sccontact-wrapper {
+      height: 100%;
+      width: 100%;
+    }
+    &__title {
+      text-align: center;
+      margin: auto;
+      &-caption {
+        font-size: var(--fs-caption-xl);
+      }
+      &-text {
+        font-size: var(--fs-title-xl);
+        text-transform: capitalize;
+        font-family: var(--ff-bold);
+        text-wrap: nowrap;
+      }
+    }
+    .btn {
+      display: block;
+      margin: auto;
+      width: fit-content;
+      margin-top: var(--gutter);
+    }
+  }
 }
