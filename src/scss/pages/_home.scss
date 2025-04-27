@@ -108,6 +108,9 @@
     &.--pt {
       padding-top: 132px;
     }
+    &.--pb {
+      padding-bottom: 32px;
+    }
     position: relative;
     top: calc(-0.5 * var(--border-radius));
     border-radius: var(--border-radius);
@@ -118,6 +121,9 @@
     z-index: 2;
     overflow: hidden;
     .scabout-wrapper {
+      height: 100%;
+      width: 100%;
+      margin: auto;
     }
     &__title {
       display: flex;
@@ -130,6 +136,7 @@
       }
       &-content {
         position: relative;
+        text-wrap: nowrap;
         .text {
           font-size: var(--fs-title-xl);
           color: var(--secondary-text-color);
@@ -161,6 +168,65 @@
       }
       &-list {
         margin-top: calc(var(--gutter) * 15);
+      }
+    }
+  }
+  // SECTION MOTTO
+  .scmotto {
+    &.--pt {
+      padding-top: 132px;
+    }
+    position: relative;
+    top: 0;
+    border-radius: var(--border-radius);
+    background-color: var(--bg-secondary-color);
+    box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
+    -webkit-box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 1px -29px 31px 0px rgba(0, 0, 0, 0.09);
+    z-index: 2;
+    overflow: hidden;
+    .scmotto-wrapper {
+      height: 100%;
+      width: 100%;
+      margin: auto;
+    }
+    &__title {
+      font-size: var(--fs-title-xl);
+      color: var(--secondary-text-color);
+      font-family: var(--ff-bold);
+      text-transform: uppercase;
+      text-align: center;
+    }
+    &__images {
+      margin-top: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      gap: calc(var(--gutter) * 0.5);
+      &-item {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        max-width: 400px;
+        .img {
+          img {
+            object-fit: cover;
+          }
+        }
+        .quote {
+          &__text {
+            font-size: var(--fs-caption-xl);
+            text-transform: capitalize;
+            @include line-clamp(2);
+          }
+          &__author {
+            position: relative;
+            top: -16px;
+            font-size: var(--fs-caption);
+            text-transform: capitalize;
+            font-style: italic;
+          }
+        }
       }
     }
   }
