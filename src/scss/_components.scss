@@ -244,3 +244,13 @@ strong {
 .--fade-in {
   @include fade-up-text;
 }
+
+.--no-scroll {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.--with-border-radius {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}

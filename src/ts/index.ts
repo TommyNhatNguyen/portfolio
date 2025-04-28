@@ -11,6 +11,8 @@ window.addEventListener("load", () => {
   const heroTitle = heroSection.querySelector(".schero__top-title");
   const heroDescription = heroSection.querySelector(".schero__top-desc");
   const heroImage = heroSection.querySelector(".schero__profile");
+  const heroPortfolio = heroSection.querySelector(".schero__bottom-title");
+  const heroSectionTimeline = gsap.timeline({});
   gsap.registerPlugin(ScrollTrigger);
   gsap.fromTo(
     [heroTitle, heroImage, heroDescription],
@@ -19,7 +21,6 @@ window.addEventListener("load", () => {
         trigger: heroSection,
         start: "top top",
         end: "top top",
-        markers: true,
       },
       opacity: 0,
       translateY: 50,
@@ -31,4 +32,33 @@ window.addEventListener("load", () => {
       ease: "power2.inOut",
     }
   );
+  heroSectionTimeline
+    .to(heroPortfolio, {
+      scrollTrigger: {
+        trigger: heroSection,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+        markers: true,
+        pin: true,
+      },
+      x: "-105%",
+    })
+    .to(heroSection, {
+      scrollTrigger: {
+        trigger: heroSection,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+        markers: true,
+      },
+      willChange: "transform",
+      transform: "scale(0.9)",
+      onStart: () => {
+        heroSection.classList.add("--with-border-radius");
+      },
+      onReverseComplete: () => {
+        heroSection.classList.remove("--with-border-radius");
+      },
+    });
 });
