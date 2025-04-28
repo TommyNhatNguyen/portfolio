@@ -5,3 +5,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin fade-up-text($duration: 0.3s, $delay: 0s) {
+  @keyframes fadeUpText {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  opacity: 0;
+  animation: fadeUpText $duration ease-out forwards;
+  animation-delay: $delay;
+}
