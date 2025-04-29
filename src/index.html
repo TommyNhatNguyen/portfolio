@@ -332,6 +332,9 @@
                 <h3 class="text">
                   <strong> I went from ... </strong>
                 </h3>
+                <span class="running">
+                  <img src="./assets/images/ship-icon.png" alt="Ship icon" />
+                </span>
                 <svg
                   class="scabout__content-svg"
                   width="250"
@@ -341,6 +344,7 @@
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
+                    id="scabout-curve-path"
                     d="M1 4 C 246.5 -15.0003, 249 87.0002, 249 221"
                     stroke="#3A3230"
                     stroke-width="1"
@@ -359,7 +363,12 @@
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path d="M0 0 0 250" stroke="#3A3230" stroke-width="1" />
+                    <path
+                      id="scabout-curve-line"
+                      d="M0 0 0 250"
+                      stroke="#3A3230"
+                      stroke-width="1"
+                    />
                   </svg>
                 </li>
                 <li class="about-item">

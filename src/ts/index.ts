@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import { MotionPathPlugin } from "gsap/all";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Make sure window is loaded before running the script
@@ -10,6 +11,7 @@ const DEFAULT_WINDOW_WIDTH = 1440;
 window.addEventListener("load", () => {
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(Observer);
+  gsap.registerPlugin(MotionPathPlugin);
   /**
      ----------------------------------------------------
      SECTION HERO
@@ -258,4 +260,45 @@ window.addEventListener("load", () => {
     duration: 1,
     ease: "power2.inOut",
   });
+
+  const aboutContentTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: aboutContent,
+      start: "-=500 +=50%",
+      end: "bottom bottom",
+      scrub: 1,
+      markers: true,
+    },
+  });
+  const run = document.querySelector(".running");
+  aboutContentTimeline.set(run, {
+    opacity: 1,
+  });
+  aboutContentTimeline
+    .to(run, {
+      motionPath: {
+        path: "#scabout-curve-path",
+        autoRotate: true,
+        start: 0.03,
+        align: "#scabout-curve-path",
+        alignOrigin: [0.5, 0.5],
+        offsetX: 30,
+        offsetY: -30,
+      },
+      transformOrigin: "50% 50%",
+      ease: "circ.out",
+    })
+    .to(run, {
+      motionPath: {
+        path: "#scabout-curve-line",
+        autoRotate: true,
+        align: "#scabout-curve-line",
+        alignOrigin: [0.5, 0.5],
+        offsetX: 30,
+        offsetY: -30,
+        end: 0.99,
+      },
+      transformOrigin: "50% 50%",
+      ease: "circ.out",
+    });
 });

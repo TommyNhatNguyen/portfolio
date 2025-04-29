@@ -286,3 +286,12 @@ strong {
     width: 100%;
   }
 }
+
+.running {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  width: 52px;
+  fill: var(--primarytext-color);
+  color: var(--primarytext-color);
+}
