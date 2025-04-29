@@ -135,17 +135,46 @@ window.addEventListener("load", () => {
     },
   });
 
-  const aboutDotElement = aboutSection.querySelector(
+  const aboutDotElementList = aboutSection.querySelectorAll(
     ".scabout__content-list .about-item .dot"
   );
+  const aboutFirstDotElement = aboutDotElementList[0];
+  const aboutLastDotElement =
+    aboutDotElementList[aboutDotElementList.length - 1];
+  console.log(
+    "🚀 ~ window.addEventListener ~ aboutLastDotElement:",
+    aboutLastDotElement
+  );
+  const aboutSvgLine = aboutSection.querySelector(".about-connect__line");
+  const aboutSvgLinePath = aboutSvgLine.querySelector("path");
+  const startXSvgLine =
+    aboutContent.clientWidth -
+    aboutFirstDotElement.parentElement.getBoundingClientRect().width +
+    10;
+  const endXSvgLine = startXSvgLine;
+  const aboutSvgLinePathWidth = aboutContent.clientWidth;
+  const aboutSvgLinePathHeight =
+    aboutLastDotElement.getBoundingClientRect().bottom -
+    aboutFirstDotElement.getBoundingClientRect().top +
+    80;
+  aboutSvgLinePath.setAttribute(
+    "d",
+    `M${startXSvgLine} 100 ${endXSvgLine} ${aboutSvgLinePathHeight}`
+  );
+  aboutSvgLine.setAttribute("width", `${aboutSvgLinePathWidth}`);
+  aboutSvgLine.setAttribute("height", `${aboutSvgLinePathHeight}`);
+  aboutSvgLine.setAttribute(
+    "viewBox",
+    `0 0 ${aboutSvgLinePathWidth} ${aboutSvgLinePathHeight}`
+  );
+
   const aboutSvgContainer = aboutSection.querySelector(".scabout__content-svg");
   const aboutSvgPathElement = aboutSvgContainer.querySelector("path");
-
   const verticalDistanceBetweenTitleAndDot =
-    aboutDotElement.getBoundingClientRect().top -
+    aboutFirstDotElement.getBoundingClientRect().top -
     aboutContentTitle.getBoundingClientRect().top;
   const svgHeight =
-    aboutDotElement.getBoundingClientRect().bottom -
+    aboutFirstDotElement.getBoundingClientRect().bottom -
     aboutContentTitle.getBoundingClientRect().top;
   const svgWidth = aboutContent.clientWidth;
   aboutSvgContainer.setAttribute("height", `${svgHeight}px`);
@@ -157,18 +186,39 @@ window.addEventListener("load", () => {
     15;
   const endX =
     aboutContent.clientWidth -
-    aboutDotElement.parentElement.getBoundingClientRect().width;
+    aboutFirstDotElement.parentElement.getBoundingClientRect().width;
   const endY = verticalDistanceBetweenTitleAndDot - 64;
   aboutSvgPathElement.setAttribute(
     "d",
     `M${startX} 3 C897.25 -16.0003, 872.875 356.6667, ${endX} ${endY}`
   );
   window.addEventListener("resize", () => {
+    const startXSvgLine =
+      aboutContent.clientWidth -
+      aboutFirstDotElement.parentElement.getBoundingClientRect().width +
+      10;
+    const endXSvgLine = startXSvgLine;
+    const aboutSvgLinePathWidth = aboutContent.clientWidth;
+    const aboutSvgLinePathHeight =
+      aboutLastDotElement.getBoundingClientRect().bottom -
+      aboutFirstDotElement.getBoundingClientRect().top +
+      80;
+    aboutSvgLinePath.setAttribute(
+      "d",
+      `M${startXSvgLine} 100 ${endXSvgLine} ${aboutSvgLinePathHeight}`
+    );
+    aboutSvgLine.setAttribute("width", `${aboutSvgLinePathWidth}`);
+    aboutSvgLine.setAttribute("height", `${aboutSvgLinePathHeight}`);
+    aboutSvgLine.setAttribute(
+      "viewBox",
+      `0 0 ${aboutSvgLinePathWidth} ${aboutSvgLinePathHeight}`
+    );
+
     const verticalDistanceBetweenTitleAndDot =
-      aboutDotElement.getBoundingClientRect().top -
+      aboutFirstDotElement.getBoundingClientRect().top -
       aboutContentTitle.getBoundingClientRect().top;
     const svgHeight =
-      aboutDotElement.getBoundingClientRect().bottom -
+      aboutFirstDotElement.getBoundingClientRect().bottom -
       aboutContentTitle.getBoundingClientRect().top;
     const svgWidth = aboutContent.clientWidth;
     aboutSvgContainer.setAttribute("height", `${svgHeight}px`);
@@ -180,7 +230,7 @@ window.addEventListener("load", () => {
       15;
     const endX =
       aboutContent.clientWidth -
-      aboutDotElement.parentElement.getBoundingClientRect().width;
+      aboutFirstDotElement.parentElement.getBoundingClientRect().width;
     const endY = verticalDistanceBetweenTitleAndDot - 68;
     aboutSvgPathElement.setAttribute(
       "d",

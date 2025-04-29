@@ -260,3 +260,12 @@ strong {
   top: 49%;
   left: 10px;
 }
+
+.about-connect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  &__line {
+    width: 100%;
+  }
+}
