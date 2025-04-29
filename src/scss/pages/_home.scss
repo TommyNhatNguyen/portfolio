@@ -161,6 +161,8 @@
     &__content {
       margin-top: 250px;
       &-title {
+        width: fit-content;
+        position: relative;
         .text {
           font-size: var(--fs-title);
           text-transform: capitalize;

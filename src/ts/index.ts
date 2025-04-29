@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 //   top: 0,
 //   behavior: "smooth",
 // });
+const DEFAULT_WINDOW_WIDTH = 1440;
 window.addEventListener("load", () => {
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(Observer);
@@ -119,9 +120,12 @@ window.addEventListener("load", () => {
   const aboutTitleContent = aboutSection.querySelector(
     ".scabout__title-content"
   );
+  const aboutContent = aboutSection.querySelector(".scabout__content");
   const aboutContentTitle = aboutSection.querySelector(
     ".scabout__content-title"
   );
+  const aboutContentTitleText = aboutContentTitle.querySelector(".text");
+  const aboutContentTitleCaption = aboutContentTitle.querySelector(".caption");
   const aboutSectionTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: workSection,
@@ -130,20 +134,73 @@ window.addEventListener("load", () => {
       scrub: 1,
     },
   });
+
+  const aboutDotElement = aboutSection.querySelector(
+    ".scabout__content-list .about-item .dot"
+  );
+  const aboutSvgContainer = aboutSection.querySelector(".scabout__content-svg");
+  const aboutSvgPathElement = aboutSvgContainer.querySelector("path");
+
+  const verticalDistanceBetweenTitleAndDot =
+    aboutDotElement.getBoundingClientRect().top -
+    aboutContentTitle.getBoundingClientRect().top;
+  const svgHeight =
+    aboutDotElement.getBoundingClientRect().bottom -
+    aboutContentTitle.getBoundingClientRect().top;
+  const svgWidth = aboutContent.clientWidth;
+  aboutSvgContainer.setAttribute("height", `${svgHeight}px`);
+  aboutSvgContainer.setAttribute("width", `${svgWidth}px`);
+  aboutSvgContainer.setAttribute("viewBox", `0 0 ${svgWidth} ${svgHeight}`);
+  const startX =
+    aboutContentTitle.getBoundingClientRect().right -
+    aboutContentTitle.getBoundingClientRect().left -
+    15;
+  const endX =
+    aboutContent.clientWidth -
+    aboutDotElement.parentElement.getBoundingClientRect().width;
+  const endY = verticalDistanceBetweenTitleAndDot - 64;
+  aboutSvgPathElement.setAttribute(
+    "d",
+    `M${startX} 3 C897.25 -16.0003, 872.875 356.6667, ${endX} ${endY}`
+  );
+  window.addEventListener("resize", () => {
+    const verticalDistanceBetweenTitleAndDot =
+      aboutDotElement.getBoundingClientRect().top -
+      aboutContentTitle.getBoundingClientRect().top;
+    const svgHeight =
+      aboutDotElement.getBoundingClientRect().bottom -
+      aboutContentTitle.getBoundingClientRect().top;
+    const svgWidth = aboutContent.clientWidth;
+    aboutSvgContainer.setAttribute("height", `${svgHeight}px`);
+    aboutSvgContainer.setAttribute("width", `${svgWidth}px`);
+    aboutSvgContainer.setAttribute("viewBox", `0 0 ${svgWidth} ${svgHeight}`);
+    const startX =
+      aboutContentTitle.getBoundingClientRect().right -
+      aboutContentTitle.getBoundingClientRect().left -
+      15;
+    const endX =
+      aboutContent.clientWidth -
+      aboutDotElement.parentElement.getBoundingClientRect().width;
+    const endY = verticalDistanceBetweenTitleAndDot - 68;
+    aboutSvgPathElement.setAttribute(
+      "d",
+      `M${startX} 3 C897.25 -16.0003, 872.875 356.6667, ${endX} ${endY}`
+    );
+  });
+
   aboutSectionTimeline.to(aboutSection, {
     willChange: "transform",
     y: -500,
   });
-  gsap.set([aboutTitleFocus, aboutTitleContent, aboutContentTitle], {
+  gsap.set([aboutTitleFocus, aboutTitleContent], {
     opacity: 0,
     translateY: 50,
   });
-  gsap.to([aboutTitleFocus, aboutTitleContent, aboutContentTitle], {
+  gsap.to([aboutTitleFocus, aboutTitleContent], {
     scrollTrigger: {
       trigger: aboutSection,
       start: `top bottom`,
       end: `top bottom`,
-      markers: true,
     },
     opacity: 1,
     translateY: 0,
