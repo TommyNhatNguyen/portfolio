@@ -2,10 +2,10 @@ import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Make sure window is loaded before running the script
-window.scrollTo({
-  top: 0,
-  behavior: "smooth",
-});
+// window.scrollTo({
+//   top: 0,
+//   behavior: "smooth",
+// });
 window.addEventListener("load", () => {
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(Observer);
@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
         willChange: "transform",
       });
     },
-    preventDefault: true,
+    // preventDefault: true,
   });
   const heroSectionTimeline = gsap.timeline({
     scrollTrigger: {
@@ -51,7 +51,6 @@ window.addEventListener("load", () => {
       start: "top top",
       end: "bottom top",
       scrub: 1,
-      markers: true,
     },
   });
   gsap.fromTo(
@@ -109,5 +108,47 @@ window.addEventListener("load", () => {
       },
       "<"
     );
+  });
+  /**
+     ----------------------------------------------------
+     SECTION ABOUT
+     ----------------------------------------------------
+    */
+  const aboutSection = document.querySelector("#scabout");
+  const aboutTitleFocus = aboutSection.querySelector(".scabout__title-focus");
+  const aboutTitleContent = aboutSection.querySelector(
+    ".scabout__title-content"
+  );
+  const aboutContentTitle = aboutSection.querySelector(
+    ".scabout__content-title"
+  );
+  const aboutSectionTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: workSection,
+      start: `${workSection.clientHeight - 1000} top`,
+      end: `${workSection.clientHeight} top`,
+      scrub: 1,
+    },
+  });
+  aboutSectionTimeline.to(aboutSection, {
+    willChange: "transform",
+    y: -500,
+  });
+  gsap.set([aboutTitleFocus, aboutTitleContent, aboutContentTitle], {
+    opacity: 0,
+    translateY: 50,
+  });
+  gsap.to([aboutTitleFocus, aboutTitleContent, aboutContentTitle], {
+    scrollTrigger: {
+      trigger: aboutSection,
+      start: `top bottom`,
+      end: `top bottom`,
+      markers: true,
+    },
+    opacity: 1,
+    translateY: 0,
+    stagger: 0.3,
+    duration: 1,
+    ease: "power2.inOut",
   });
 });
