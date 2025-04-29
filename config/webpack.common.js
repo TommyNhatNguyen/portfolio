@@ -73,6 +73,7 @@ export default {
     alias: {
       "@": path.resolve(__dirname, "../src"),
     },
+    modules: ["...", "/node_modules"],
   },
   output: {
     filename: "[name].main.js",

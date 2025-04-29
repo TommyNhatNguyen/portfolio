@@ -1,7 +1,10 @@
+// @ts-expect-error import error
+import LocomotiveScroll from "locomotive-scroll";
 import { gsap } from "gsap";
 import { MotionPathPlugin } from "gsap/all";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 // Make sure window is loaded before running the script
 // window.scrollTo({
 //   top: 0,
@@ -9,6 +12,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // });
 const DEFAULT_WINDOW_WIDTH = 1440;
 window.addEventListener("load", () => {
+  const scroll = new LocomotiveScroll({
+    el: document.querySelector("[data-scroll-container]"),
+  });
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(Observer);
   gsap.registerPlugin(MotionPathPlugin);
@@ -46,7 +52,7 @@ window.addEventListener("load", () => {
         willChange: "transform",
       });
     },
-    // preventDefault: true,
+    preventDefault: true,
   });
   const heroSectionTimeline = gsap.timeline({
     scrollTrigger: {
@@ -104,6 +110,32 @@ window.addEventListener("load", () => {
     },
   });
   workListItems.forEach((item: HTMLElement, index) => {
+    const img = item.querySelector(".project__titlegroup-image img");
+    const imgContainer = item.querySelector(".project__titlegroup-image");
+    const text = item.querySelector(
+      ".project__titlegroup .project__titlegroup-title"
+    );
+    workListItemTimeline.to(
+      img,
+      {
+        y: Number(item.dataset.speed) * 300,
+      },
+      "<"
+    );
+    workListItemTimeline.to(
+      text,
+      {
+        y: Number(item.dataset.speed) * -500,
+      },
+      "<"
+    );
+    workListItemTimeline.to(
+      imgContainer,
+      {
+        y: Number(item.dataset.speed) * -500,
+      },
+      "<"
+    );
     workListItemTimeline.to(
       item,
       {
@@ -143,10 +175,6 @@ window.addEventListener("load", () => {
   const aboutFirstDotElement = aboutDotElementList[0];
   const aboutLastDotElement =
     aboutDotElementList[aboutDotElementList.length - 1];
-  console.log(
-    "🚀 ~ window.addEventListener ~ aboutLastDotElement:",
-    aboutLastDotElement
-  );
   const aboutSvgLine = aboutSection.querySelector(".about-connect__line");
   const aboutSvgLinePath = aboutSvgLine.querySelector("path");
   const startXSvgLine =
@@ -267,7 +295,6 @@ window.addEventListener("load", () => {
       start: "-=500 +=50%",
       end: "bottom bottom",
       scrub: 1,
-      markers: true,
     },
   });
   const run = document.querySelector(".running");
