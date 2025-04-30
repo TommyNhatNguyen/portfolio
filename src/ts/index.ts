@@ -52,7 +52,7 @@ window.addEventListener("load", () => {
         willChange: "transform",
       });
     },
-    preventDefault: true,
+    // preventDefault: true,
   });
   const heroSectionTimeline = gsap.timeline({
     scrollTrigger: {
@@ -158,8 +158,6 @@ window.addEventListener("load", () => {
   const aboutContentTitle = aboutSection.querySelector(
     ".scabout__content-title"
   );
-  const aboutContentTitleText = aboutContentTitle.querySelector(".text");
-  const aboutContentTitleCaption = aboutContentTitle.querySelector(".caption");
   const aboutSectionTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: workSection,
@@ -289,6 +287,7 @@ window.addEventListener("load", () => {
     ease: "power2.inOut",
   });
 
+  const run = document.querySelector(".running");
   const aboutContentTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: aboutContent,
@@ -297,7 +296,6 @@ window.addEventListener("load", () => {
       scrub: 1,
     },
   });
-  const run = document.querySelector(".running");
   aboutContentTimeline.set(run, {
     opacity: 1,
   });
@@ -328,4 +326,70 @@ window.addEventListener("load", () => {
       transformOrigin: "50% 50%",
       ease: "circ.out",
     });
+
+  const aboutItemList = aboutContent.querySelectorAll(".about-item");
+  const aboutItemImages = Array.from(
+    aboutItemList[0].querySelectorAll(".about-item__middle img")
+  );
+  const aboutItemTexts = Array.from(
+    aboutItemList[0].querySelectorAll(".about-item__bottom .content")
+  );
+  gsap.set([aboutItemImages.slice(1), aboutItemTexts.slice(1)], {
+    y: `100%`,
+  });
+  let animating = false;
+  let currentIndex = -1;
+  const aboutItemObserver = Observer.create({
+    tolerance: 10,
+    target: window,
+    onDown: (self) => {
+      if (!animating && currentIndex < aboutItemImages.length - 2) {
+        ++currentIndex;
+        gsap.to([aboutItemImages[currentIndex], aboutItemTexts[currentIndex]], {
+          y: `-100%`,
+          duration: 0.8,
+          onStart: () => {
+            animating = true;
+          },
+          onComplete: () => {
+            animating = false;
+            if (currentIndex == aboutItemImages.length - 2) {
+              setTimeout(() => self.disable(), 0.8);
+            }
+          },
+          ease: "power2.inOut",
+        });
+        gsap.to(
+          [aboutItemImages[currentIndex + 1], aboutItemTexts[currentIndex + 1]],
+          {
+            y: 0,
+            duration: 0.8,
+            ease: "power2.inOut",
+          }
+        );
+      }
+    },
+    preventDefault: true,
+  });
+  aboutItemObserver.disable();
+  gsap.to(aboutItemList, {
+    scrollTrigger: {
+      trigger: aboutItemList,
+      start: "-=100 +=50%",
+      end: "+=1",
+      scrub: 1,
+      markers: true,
+      pin: true,
+    },
+    onStart: () => {
+      if (currentIndex < aboutItemImages.length - 2) {
+        aboutItemObserver.enable();
+      }
+    },
+    onComplete: () => {
+      if (currentIndex < aboutItemImages.length - 2) {
+        aboutItemObserver.enable();
+      }
+    },
+  });
 });

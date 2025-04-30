@@ -165,17 +165,37 @@
     }
   }
   &__middle {
+    position: relative;
     max-height: 550px;
     width: 100%;
     aspect-ratio: 1294 / 710;
+    overflow: hidden;
     img {
       object-fit: cover;
+      width: 100%;
+      height: 100%;
+      &:not(:first-of-type) {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
     }
   }
   &__bottom {
+    position: relative;
     max-width: 67%;
     margin-top: 16px;
-    @include line-clamp(4);
+    overflow: hidden;
+    .content {
+      @include line-clamp(4);
+      &:not(:first-of-type) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }
 
