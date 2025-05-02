@@ -12,9 +12,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // });
 const DEFAULT_WINDOW_WIDTH = 1440;
 window.addEventListener("load", () => {
-  const scroll = new LocomotiveScroll({
-    el: document.querySelector("[data-scroll-container]"),
-  });
+  // const scroll = new LocomotiveScroll({
+  //   el: document.querySelector("[data-scroll-container]"),
+  // });
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(Observer);
   gsap.registerPlugin(MotionPathPlugin);
@@ -266,10 +266,10 @@ window.addEventListener("load", () => {
     );
   });
 
-  aboutSectionTimeline.to(aboutSection, {
-    willChange: "transform",
-    y: -500,
-  });
+  // aboutSectionTimeline.to(aboutSection, {
+  //   willChange: "transform",
+  //   y: -500,
+  // });
   gsap.set([aboutTitleFocus, aboutTitleContent], {
     opacity: 0,
     translateY: 50,
@@ -328,68 +328,49 @@ window.addEventListener("load", () => {
     });
 
   const aboutItemList = aboutContent.querySelectorAll(".about-item");
-  const aboutItemImages = Array.from(
-    aboutItemList[0].querySelectorAll(".about-item__middle img")
-  );
-  const aboutItemTexts = Array.from(
-    aboutItemList[0].querySelectorAll(".about-item__bottom .content")
-  );
-  gsap.set([aboutItemImages.slice(1), aboutItemTexts.slice(1)], {
-    y: `100%`,
-  });
-  let animating = false;
-  let currentIndex = -1;
-  const aboutItemObserver = Observer.create({
-    tolerance: 10,
-    target: window,
-    onDown: (self) => {
-      if (!animating && currentIndex < aboutItemImages.length - 2) {
-        ++currentIndex;
-        gsap.to([aboutItemImages[currentIndex], aboutItemTexts[currentIndex]], {
-          y: `-100%`,
-          duration: 0.8,
-          onStart: () => {
-            animating = true;
-          },
-          onComplete: () => {
-            animating = false;
-            if (currentIndex == aboutItemImages.length - 2) {
-              setTimeout(() => self.disable(), 0.8);
-            }
-          },
-          ease: "power2.inOut",
-        });
-        gsap.to(
-          [aboutItemImages[currentIndex + 1], aboutItemTexts[currentIndex + 1]],
+  aboutItemList.forEach((item, index) => {
+    const images = Array.from(
+      item.querySelectorAll(".about-item__middle img")
+    ).slice(1);
+    const contents = Array.from(
+      item.querySelectorAll(".about-item__bottom .content")
+    );
+    gsap.to(item, {
+      scrollTrigger: {
+        trigger: item,
+        start: "top top",
+        end: `+=${images[0].clientHeight * 3}`,
+        scrub: 1,
+        pin: true,
+      },
+    });
+    let timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: item,
+        start: "top top",
+        end: `+=${images[0].clientHeight * 3}`,
+        scrub: 1,
+      },
+    });
+    images.forEach((_, index) =>
+      timeline
+        .to(images[images.length - index - 1], {
+          yPercent: -100,
+        })
+        .to(
+          contents[index],
           {
-            y: 0,
-            duration: 0.8,
-            ease: "power2.inOut",
-          }
-        );
-      }
-    },
-    preventDefault: true,
-  });
-  aboutItemObserver.disable();
-  gsap.to(aboutItemList, {
-    scrollTrigger: {
-      trigger: aboutItemList,
-      start: "-=100 +=50%",
-      end: "+=1",
-      scrub: 1,
-      markers: true,
-      pin: true,
-    },
-    onStart: () => {
-      if (currentIndex < aboutItemImages.length - 2) {
-        aboutItemObserver.enable();
-      }
-    },
-    onComplete: () => {
-      if (currentIndex < aboutItemImages.length - 2) {
-        aboutItemObserver.enable();
-      }
-    },
+            yPercent: -100 * (index + 1),
+          },
+          "<"
+        )
+        .to(
+          contents[index + 1],
+          {
+            yPercent: -100,
+          },
+          "<"
+        )
+    );
   });
 });

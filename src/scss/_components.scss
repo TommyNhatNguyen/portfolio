@@ -120,6 +120,7 @@
 }
 
 .about-item {
+  pointer-events: none;
   &:nth-of-type(3) {
     .titlelead {
       .dot {
@@ -190,7 +191,7 @@
       @include line-clamp(4);
       &:not(:first-of-type) {
         position: absolute;
-        top: 0;
+        top: 100%;
         left: 0;
         width: 100%;
         height: 100%;
