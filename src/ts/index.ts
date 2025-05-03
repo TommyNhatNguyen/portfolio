@@ -155,121 +155,32 @@ window.addEventListener("load", () => {
     ".scabout__title-content"
   );
   const aboutContent = aboutSection.querySelector(".scabout__content");
-  const aboutContentTitle = aboutSection.querySelector(
-    ".scabout__content-title"
-  );
-  const aboutSectionTimeline = gsap.timeline({
+  const aboutItemList = aboutContent.querySelectorAll(".about-item");
+
+  const aboutContentLine = aboutSection.querySelector(".scabout__content-line");
+  const aboutContentLinePath = aboutContentLine.querySelector("path");
+  const ship = aboutSection.querySelector(".running");
+  gsap.set(ship, {
+    xPercent: -50,
+    yPercent: -165,
+    transformOrigin: "50% 50%",
+  });
+  gsap.to(ship, {
     scrollTrigger: {
-      trigger: workSection,
-      start: `${workSection.clientHeight - 1000} top`,
-      end: `${workSection.clientHeight} top`,
-      scrub: 1,
+      trigger: aboutContent,
+      start: "top center",
+      end: "+=16756 center",
+      scrub: 0.5,
+    },
+    motionPath: {
+      path: aboutContentLinePath,
+      align: aboutContentLinePath,
+      autoRotate: true,
+      offsetX: ship.clientHeight / 2,
+      offsetY: ship.clientHeight / 2,
     },
   });
 
-  const aboutDotElementList = aboutSection.querySelectorAll(
-    ".scabout__content-list .about-item .dot"
-  );
-  const aboutFirstDotElement = aboutDotElementList[0];
-  const aboutLastDotElement =
-    aboutDotElementList[aboutDotElementList.length - 1];
-  const aboutSvgLine = aboutSection.querySelector(".about-connect__line");
-  const aboutSvgLinePath = aboutSvgLine.querySelector("path");
-  const startXSvgLine =
-    aboutContent.clientWidth -
-    aboutFirstDotElement.parentElement.getBoundingClientRect().width +
-    10;
-  const endXSvgLine = startXSvgLine;
-  const aboutSvgLinePathWidth = aboutContent.clientWidth;
-  const aboutSvgLinePathHeight =
-    aboutLastDotElement.getBoundingClientRect().bottom -
-    aboutFirstDotElement.getBoundingClientRect().top +
-    80;
-  aboutSvgLinePath.setAttribute(
-    "d",
-    `M${startXSvgLine} 100 ${endXSvgLine} ${aboutSvgLinePathHeight}`
-  );
-  aboutSvgLine.setAttribute("width", `${aboutSvgLinePathWidth}`);
-  aboutSvgLine.setAttribute("height", `${aboutSvgLinePathHeight}`);
-  aboutSvgLine.setAttribute(
-    "viewBox",
-    `0 0 ${aboutSvgLinePathWidth} ${aboutSvgLinePathHeight}`
-  );
-
-  const aboutSvgContainer = aboutSection.querySelector(".scabout__content-svg");
-  const aboutSvgPathElement = aboutSvgContainer.querySelector("path");
-  const verticalDistanceBetweenTitleAndDot =
-    aboutFirstDotElement.getBoundingClientRect().top -
-    aboutContentTitle.getBoundingClientRect().top;
-  const svgHeight =
-    aboutFirstDotElement.getBoundingClientRect().bottom -
-    aboutContentTitle.getBoundingClientRect().top;
-  const svgWidth = aboutContent.clientWidth;
-  aboutSvgContainer.setAttribute("height", `${svgHeight}px`);
-  aboutSvgContainer.setAttribute("width", `${svgWidth}px`);
-  aboutSvgContainer.setAttribute("viewBox", `0 0 ${svgWidth} ${svgHeight}`);
-  const startX =
-    aboutContentTitle.getBoundingClientRect().right -
-    aboutContentTitle.getBoundingClientRect().left -
-    15;
-  const endX =
-    aboutContent.clientWidth -
-    aboutFirstDotElement.parentElement.getBoundingClientRect().width;
-  const endY = verticalDistanceBetweenTitleAndDot - 64;
-  aboutSvgPathElement.setAttribute(
-    "d",
-    `M${startX} 3 C897.25 -16.0003, 872.875 356.6667, ${endX} ${endY}`
-  );
-  window.addEventListener("resize", () => {
-    const startXSvgLine =
-      aboutContent.clientWidth -
-      aboutFirstDotElement.parentElement.getBoundingClientRect().width +
-      10;
-    const endXSvgLine = startXSvgLine;
-    const aboutSvgLinePathWidth = aboutContent.clientWidth;
-    const aboutSvgLinePathHeight =
-      aboutLastDotElement.getBoundingClientRect().bottom -
-      aboutFirstDotElement.getBoundingClientRect().top +
-      80;
-    aboutSvgLinePath.setAttribute(
-      "d",
-      `M${startXSvgLine} 100 ${endXSvgLine} ${aboutSvgLinePathHeight}`
-    );
-    aboutSvgLine.setAttribute("width", `${aboutSvgLinePathWidth}`);
-    aboutSvgLine.setAttribute("height", `${aboutSvgLinePathHeight}`);
-    aboutSvgLine.setAttribute(
-      "viewBox",
-      `0 0 ${aboutSvgLinePathWidth} ${aboutSvgLinePathHeight}`
-    );
-
-    const verticalDistanceBetweenTitleAndDot =
-      aboutFirstDotElement.getBoundingClientRect().top -
-      aboutContentTitle.getBoundingClientRect().top;
-    const svgHeight =
-      aboutFirstDotElement.getBoundingClientRect().bottom -
-      aboutContentTitle.getBoundingClientRect().top;
-    const svgWidth = aboutContent.clientWidth;
-    aboutSvgContainer.setAttribute("height", `${svgHeight}px`);
-    aboutSvgContainer.setAttribute("width", `${svgWidth}px`);
-    aboutSvgContainer.setAttribute("viewBox", `0 0 ${svgWidth} ${svgHeight}`);
-    const startX =
-      aboutContentTitle.getBoundingClientRect().right -
-      aboutContentTitle.getBoundingClientRect().left -
-      15;
-    const endX =
-      aboutContent.clientWidth -
-      aboutFirstDotElement.parentElement.getBoundingClientRect().width;
-    const endY = verticalDistanceBetweenTitleAndDot - 68;
-    aboutSvgPathElement.setAttribute(
-      "d",
-      `M${startX} 3 C897.25 -16.0003, 872.875 356.6667, ${endX} ${endY}`
-    );
-  });
-
-  // aboutSectionTimeline.to(aboutSection, {
-  //   willChange: "transform",
-  //   y: -500,
-  // });
   gsap.set([aboutTitleFocus, aboutTitleContent], {
     opacity: 0,
     translateY: 50,
@@ -287,47 +198,6 @@ window.addEventListener("load", () => {
     ease: "power2.inOut",
   });
 
-  const run = document.querySelector(".running");
-  const aboutContentTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: aboutContent,
-      start: "-=500 +=50%",
-      end: "bottom bottom",
-      scrub: 1,
-    },
-  });
-  aboutContentTimeline.set(run, {
-    opacity: 1,
-  });
-  aboutContentTimeline
-    .to(run, {
-      motionPath: {
-        path: "#scabout-curve-path",
-        autoRotate: true,
-        start: 0.03,
-        align: "#scabout-curve-path",
-        alignOrigin: [0.5, 0.5],
-        offsetX: 30,
-        offsetY: -30,
-      },
-      transformOrigin: "50% 50%",
-      ease: "circ.out",
-    })
-    .to(run, {
-      motionPath: {
-        path: "#scabout-curve-line",
-        autoRotate: true,
-        align: "#scabout-curve-line",
-        alignOrigin: [0.5, 0.5],
-        offsetX: 30,
-        offsetY: -30,
-        end: 0.99,
-      },
-      transformOrigin: "50% 50%",
-      ease: "circ.out",
-    });
-
-  const aboutItemList = aboutContent.querySelectorAll(".about-item");
   aboutItemList.forEach((item, index) => {
     const images = Array.from(
       item.querySelectorAll(".about-item__middle img")
@@ -338,7 +208,7 @@ window.addEventListener("load", () => {
     gsap.to(item, {
       scrollTrigger: {
         trigger: item,
-        start: "top top",
+        start: "center center",
         end: `+=${images[0].clientHeight * 3}`,
         scrub: 1,
         pin: true,
@@ -347,7 +217,7 @@ window.addEventListener("load", () => {
     let timeline = gsap.timeline({
       scrollTrigger: {
         trigger: item,
-        start: "top top",
+        start: "center center",
         end: `+=${images[0].clientHeight * 3}`,
         scrub: 1,
       },

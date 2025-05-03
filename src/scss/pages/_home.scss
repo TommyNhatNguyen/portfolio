@@ -109,6 +109,7 @@
   }
   // SECTION ABOUT
   .scabout {
+    overflow: hidden;
     &.--pt {
       padding-top: 132px;
     }
@@ -159,6 +160,12 @@
     }
     &__content {
       margin-top: 250px;
+      position: relative;
+      &-line {
+        position: absolute;
+        top: 80px;
+        right: 400px;
+      }
       &-title {
         width: fit-content;
         position: relative;

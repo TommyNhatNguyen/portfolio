@@ -121,15 +121,28 @@
 
 .about-item {
   pointer-events: none;
-  &:nth-of-type(3) {
+  .titlelead {
+    .dot {
+      display: none;
+    }
+  }
+  &:nth-of-type(1) {
     .titlelead {
       .dot {
         position: relative;
-        left: 24px;
+        left: -11px;
       }
     }
   }
-  &:nth-of-type(4) {
+  &:nth-of-type(2) {
+    .titlelead {
+      .dot {
+        position: relative;
+        left: 2px;
+      }
+    }
+  }
+  &:nth-of-type(3) {
     .titlelead {
       .dot {
         position: relative;
@@ -312,8 +325,7 @@ strong {
 .running {
   position: absolute;
   display: block;
-  opacity: 0;
-  width: 52px;
+  width: 62px;
   fill: var(--primarytext-color);
   color: var(--primarytext-color);
 }
