@@ -1,7 +1,7 @@
 // @ts-expect-error import error
 import LocomotiveScroll from "locomotive-scroll";
 import { gsap } from "gsap";
-import { MotionPathPlugin } from "gsap/all";
+import { MotionPathPlugin, ScrollToPlugin } from "gsap/all";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -15,6 +15,7 @@ window.addEventListener("load", () => {
     el: document.querySelector("[data-scroll-container]"),
   });
   gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollToPlugin);
   gsap.registerPlugin(Observer);
   gsap.registerPlugin(MotionPathPlugin);
   /**
@@ -276,8 +277,10 @@ window.addEventListener("load", () => {
      HEADER
      ----------------------------------------------------
     */
-   const header = document.querySelector(".header");
+  const header = document.querySelector(".header");
   const hamburger = document.querySelector(".header__hamburger");
+  const navigations = header.querySelectorAll(".header__nav-content .item a");
+
   hamburger.addEventListener("click", () => {
     if (header.classList.contains("--active")) {
       header.classList.remove("--active");
@@ -288,6 +291,14 @@ window.addEventListener("load", () => {
       document.body.classList.add("--disable-scroll");
       heroPortfolioObserver.disable();
     }
+  });
+
+  navigations.forEach((item) => {
+    const href = item.getAttribute("href-data");
+    const element = document.querySelector(`${href}`);
+    item.parentElement.addEventListener("click", () => {
+      gsap.to(window, { duration: 2, scrollTo: href });
+    });
   });
 });
 
