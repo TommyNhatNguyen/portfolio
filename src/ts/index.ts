@@ -52,7 +52,7 @@ window.addEventListener("load", () => {
         willChange: "transform",
       });
     },
-    // preventDefault: true,
+    preventDefault: true,
   });
   const heroSectionTimeline = gsap.timeline({
     scrollTrigger: {
