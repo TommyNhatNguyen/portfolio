@@ -79,6 +79,5 @@ export default {
     filename: "[name].main.js",
     path: __build_dirname,
     clean: true,
-    publicPath: "/",
   },
 };

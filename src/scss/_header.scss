@@ -61,6 +61,7 @@
     transition-timing-function: ease-in-out;
     &-content {
       padding-top: 130px;
+      padding-bottom: var(--gutter);
       padding-left: calc(var(--gutter) * 2);
       position: absolute;
       right: 0;
@@ -70,6 +71,7 @@
       transform: translateX(100%);
       transition-duration: 0.3s;
       transition-timing-function: ease-in-out;
+      overflow-y: auto;
       &::before {
         content: "";
         position: fixed;
@@ -85,7 +87,7 @@
       }
       .item {
         text-transform: capitalize;
-        font-size: var(--fs-title-xl);
+        font-size: var(--fs-title);
         font-family: var(--ff-bold);
         transition: all 0.3s;
         display: flex;
