@@ -6,15 +6,14 @@ import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Make sure window is loaded before running the script
-// window.scrollTo({
-//   top: 0,
-//   behavior: "smooth",
-// });
-const DEFAULT_WINDOW_WIDTH = 1440;
+window.scrollTo({
+  top: 0,
+  behavior: "smooth",
+});
 window.addEventListener("load", () => {
-  // const scroll = new LocomotiveScroll({
-  //   el: document.querySelector("[data-scroll-container]"),
-  // });
+  const scroll = new LocomotiveScroll({
+    el: document.querySelector("[data-scroll-container]"),
+  });
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(Observer);
   gsap.registerPlugin(MotionPathPlugin);
