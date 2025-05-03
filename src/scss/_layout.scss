@@ -19,6 +19,7 @@ body {
   overflow-x: hidden;
   &.--disable-scroll {
     overflow: hidden;
+    height: 100vh;
   }
   &::before {
     content: "";

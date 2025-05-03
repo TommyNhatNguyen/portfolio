@@ -276,12 +276,17 @@ window.addEventListener("load", () => {
      HEADER
      ----------------------------------------------------
     */
+   const header = document.querySelector(".header");
   const hamburger = document.querySelector(".header__hamburger");
   hamburger.addEventListener("click", () => {
-    if (hamburger.classList.contains("--active")) {
-      hamburger.classList.remove("--active");
+    if (header.classList.contains("--active")) {
+      header.classList.remove("--active");
+      document.body.classList.remove("--disable-scroll");
+      heroPortfolioObserver.enable();
     } else {
-      hamburger.classList.add("--active");
+      header.classList.add("--active");
+      document.body.classList.add("--disable-scroll");
+      heroPortfolioObserver.disable();
     }
   });
 });
