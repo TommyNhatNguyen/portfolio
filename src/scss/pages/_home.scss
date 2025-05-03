@@ -190,6 +190,9 @@
     &.--pt {
       padding-top: 132px;
     }
+    &.--pb {
+      padding-bottom: 232px;
+    }
     position: relative;
     top: 0;
     border-radius: var(--border-radius);
@@ -218,12 +221,14 @@
       display: flex;
       align-items: center;
       justify-content: space-evenly;
-      gap: calc(var(--gutter) * 0.5);
+      gap: calc(var(--gutter) * 1.5);
+      min-height: fit-content;
       &-item {
         position: relative;
         height: 100%;
         width: 100%;
-        max-width: 400px;
+        max-height: fit-content;
+        flex-shrink: 0;
         .img {
           img {
             object-fit: cover;
