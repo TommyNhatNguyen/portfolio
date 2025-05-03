@@ -270,6 +270,20 @@ window.addEventListener("load", () => {
     repeat: -1,
     paddingRight: 25,
   });
+
+  /**
+     ----------------------------------------------------
+     HEADER
+     ----------------------------------------------------
+    */
+  const hamburger = document.querySelector(".header__hamburger");
+  hamburger.addEventListener("click", () => {
+    if (hamburger.classList.contains("--active")) {
+      hamburger.classList.remove("--active");
+    } else {
+      hamburger.classList.add("--active");
+    }
+  });
 });
 
 type HorizontalLoopConfig = {
